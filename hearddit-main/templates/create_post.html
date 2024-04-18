@@ -1,0 +1,62 @@
+{%extends '_layout.html'%}
+{%block body%}
+<div class="container">
+  <div class="row d-flex pt-5 justify-content-center">
+      <div class="hearddit-card-account">
+        {% with messages = get_flashed_messages() %}
+    {% if messages %}
+        <div class="alert alert-primary" role="alert">
+            {{messages[0]}}
+        </div>
+    {% endif %}
+    {% endwith %}
+        <div class="exit-button">
+          <a href="/">
+            <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="white" class="bi bi-x-lg" viewBox="0 0 16 16">
+              <path d="M2.146 2.854a.5.5 0 1 1 .708-.708L8 7.293l5.146-5.147a.5.5 0 0 1 .708.708L8.707 8l5.147 5.146a.5.5 0 0 1-.708.708L8 8.707l-5.146 5.147a.5.5 0 0 1-.708-.708L7.293 8 2.146 2.854Z"/>
+            </svg>
+          </a>
+        </div>
+          <div class="card-header d-flex flex-column">
+              <div class="title">Create Post</div>
+              <!-- Update to link to spotifty intergration -->   
+              <hr>
+          </div>
+          <form action="/create/post" method="post">
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                  <label for="title">Post Title</label>
+                  <input type="text" class="form-control mt-1" id="title" name="title" aria-describedby="title" placeholder="Enter Post Title">
+                </div>
+                <div class="form-group col-md-3">
+                    <label for="title">Select Community</label>
+                    <select class="form-select" id="com_id" name="com_id" aria-label="">
+                      <option selected>Select Community</option>
+                      {% for community in communities %}
+                      <option value="{{community.com_id}}" id="com_id" name="com_id"> {{community.com_name}}</option>
+                      {% endfor %}
+                    </select>
+                </div>
+            </div>
+            <div class="form-row">
+              <div class="form-group">
+                <label for="post_text" class="mt-3">Post Content</label>
+                <input type="text" class="form-control h-75" id="post_text" name="post_text" placeholder="Enter your message to the world here...">
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="form-group">
+                <label for="post_link" class="mt-3">External Link</label>
+                <input type="text" class="form-control" id="post_link" name="post_link" placeholder="Paste Spotify Link or Search for Songs: artist-songname">
+                <small id="passwordHelpBlock" class="form-text text-white">
+                  Example: David Bowie-Heros
+                </small>
+            </div>
+            </div>
+            <button type="submit" class="btn btn-hearddit-primary float-end mt-3">Create Post</button></form>
+          </form>
+      </div>
+  </div>
+</div>
+
+{%endblock%}
